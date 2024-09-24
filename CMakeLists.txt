@@ -1,0 +1,131 @@
+check_include_file_cxx(stdint.h HAVE_STDINT_H)
+if(HAVE_STDINT_H)
+    add_definitions(-DHAVE_STDINT_H)
+endif()
+
+set(examples_as_tests_sources)
+if(${ENABLE_EXAMPLES})
+    set(examples_as_tests_sources
+        #test/aqua-sim-fg-examples-test-suite.cc
+        )
+endif()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-reorder")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-result")
+build_lib(
+    LIBNAME aqua-sim-fg
+    SOURCE_FILES helper/aqua-sim-helper.cc  
+		 helper/named-data-helper.cc  
+		 helper/on-off-nd-helper.cc  
+		 helper/aqua-sim-traffic-gen-helper.cc  
+		 helper/aqua-sim-socket-helper.cc  
+		 model/ndn/named-data.cc  
+		 model/ndn/named-data-header.cc  
+		 model/ndn/name-discovery.cc  
+		 model/ndn/pit.cc 
+		 model/ndn/fib.cc  
+		 model/ndn/content-storage.cc  
+		 model/ndn/cs-fifo.cc  
+		 model/ndn/cs-lru.cc  
+		 model/ndn/cs-random.cc  
+		 model/ndn/onoff-nd-application.cc  
+		 model/aqua-sim-node.cc  
+		 model/aqua-sim-net-device.cc  
+		 model/aqua-sim-address.cc  
+		 model/aqua-sim-header.cc  
+		 model/aqua-sim-trailer.cc  
+		 model/aqua-sim-header-mac.cc  
+		 model/aqua-sim-header-transport.cc  
+		 model/aqua-sim-header-routing.cc  
+		 model/aqua-sim-socket.cc  
+		 model/aqua-sim-socket-factory.cc  
+		 model/aqua-sim-socket-address.cc    
+		 model/aqua-sim-transport.cc  
+		 model/aqua-sim-routing.cc  
+		 model/aqua-sim-routing-static.cc  
+		 model/aqua-sim-mac.cc  
+		 model/aqua-sim-mac-broadcast.cc  
+		 model/aqua-sim-mac-aloha.cc  
+		 model/aqua-sim-mac-TDMA.cc  
+		 model/aqua-sim-phy.cc  
+		 model/aqua-sim-phy-cmn.cc  
+		 model/aqua-sim-sinr-checker.cc  
+		 model/aqua-sim-energy-model.cc  
+		 model/aqua-sim-channel.cc  
+		 model/aqua-sim-propagation.cc  
+		 model/aqua-sim-propagation-range.cc  
+		 model/aqua-sim-propagation-simple.cc  
+		 model/aqua-sim-signal-cache.cc  
+		 model/aqua-sim-mobility-kinematic.cc  
+		 model/aqua-sim-mobility-rwp.cc  
+		 model/aqua-sim-mobility-pattern.cc  
+		 model/aqua-sim-modulation.cc  
+		 model/aqua-sim-modulation-ofdm.cc  
+		 model/aqua-sim-noise-generator.cc  
+		 model/aqua-sim-synchronization.cc  
+		 model/aqua-sim-localization.cc  
+		 model/aqua-sim-attack-model.cc  
+		 model/aqua-sim-trace-reader.cc  
+		 model/aqua-sim-traffic-gen.cc   
+		 model/aqua-sim-hash-table.cc  
+		 model/aqua-sim-pt-tag.cc  
+    HEADER_FILES helper/named-data-helper.h  
+		 helper/aqua-sim-traffic-gen-helper.h  
+		 helper/aqua-sim-socket-helper.h  
+		 helper/aqua-sim-helper.h  
+		 helper/on-off-nd-helper.h
+		 model/ndn/named-data.h  
+		 model/ndn/named-data-header.h  
+		 model/ndn/name-discovery.h  
+		 model/ndn/pit.h  
+		 model/ndn/fib.h  
+		 model/ndn/content-storage.h  
+		 model/ndn/cs-fifo.h  
+		 model/ndn/cs-lru.h  
+		 model/ndn/cs-random.h  
+		 model/ndn/onoff-nd-application.h  
+		 model/aqua-sim-node.h  
+		 model/aqua-sim-net-device.h  
+		 model/aqua-sim-address.h  
+		 model/aqua-sim-header.h  
+		 model/aqua-sim-trailer.h  
+		 model/aqua-sim-header-transport.h  
+		 model/aqua-sim-header-routing.h  
+		 model/aqua-sim-header-mac.h  
+		 model/aqua-sim-socket.h  
+		 model/aqua-sim-socket-factory.h  
+		 model/aqua-sim-socket-address.h  
+		 model/aqua-sim-transport.h  
+		 model/aqua-sim-routing.h  
+		 model/aqua-sim-routing-static.h  
+		 model/aqua-sim-mac.h  
+		 model/aqua-sim-mac-broadcast.h  
+		 model/aqua-sim-mac-aloha.h  
+		 model/aqua-sim-mac-TDMA.h  
+		 model/aqua-sim-phy.h  
+		 model/aqua-sim-phy-cmn.h  
+		 model/aqua-sim-sinr-checker.h  
+		 model/aqua-sim-signal-cache.h  
+		 model/aqua-sim-modulation.h  
+		 model/aqua-sim-modulation-ofdm.h  
+		 model/aqua-sim-energy-model.h  
+		 model/aqua-sim-channel.h  
+		 model/aqua-sim-propagation.h  
+		 model/aqua-sim-propagation-range.h  
+		 model/aqua-sim-propagation-simple.h  
+		 model/aqua-sim-mobility-kinematic.h  
+		 model/aqua-sim-mobility-rwp.h  
+		 model/aqua-sim-mobility-pattern.h  
+		 model/aqua-sim-noise-generator.h  
+		 model/aqua-sim-synchronization.h  
+		 model/aqua-sim-localization.h  
+		 model/aqua-sim-attack-model.h  
+		 model/aqua-sim-trace-reader.h  
+		 model/aqua-sim-traffic-gen.h  
+		 model/aqua-sim-datastructure.h  
+		 model/aqua-sim-hash-table.h  
+		 model/aqua-sim-pt-tag.h  
+    LIBRARIES_TO_LINK ${libcore}
+    TEST_SOURCES test/aqua-sim-fg-test-suite.cc
+                 ${examples_as_tests_sources}
+)
+
