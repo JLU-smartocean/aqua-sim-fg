@@ -23,13 +23,6 @@
 #include <unistd.h>
 #include <iostream>
 
-/*
- * PMAC
- *
- * String topology:
- * S---->  N  -----> N -----> N -----> D
- *
- */
 
 using namespace ns3;
 
@@ -39,11 +32,11 @@ int main(int argc, char *argv[])
 {
 	double appStop = 5000; //seconds
 	double simStop = 30000; //seconds
-	int nodes = 5;
+	int nodes = 2;
 	uint32_t m_dataRate = 80;
 	uint32_t m_packetSize = 32;
-	int Nsend = 1;
-	double traffic = 0.01;
+	int Nsend = 0;
+	double traffic = 0.05;
 	//double range = 20;
 
 	//LogComponentEnable("AquaSimAloha", LOG_LEVEL_DEBUG);
@@ -57,7 +50,7 @@ int main(int argc, char *argv[])
 	cmd.AddValue("nodes", "Amount of regular underwater nodes", nodes);
 	cmd.Parse(argc, argv);
 
-	// GlobalValue::Bind ("SimulatorImplementationType", StringValue ("ns3::RealtimeSimulatorImpl"));
+	GlobalValue::Bind ("SimulatorImplementationType", StringValue ("ns3::RealtimeSimulatorImpl"));
 
 	std::cout << "-----------Initializing simulation-----------\n";
 
@@ -78,9 +71,10 @@ int main(int argc, char *argv[])
 	//asHelper.SetSignalCache("ns3::AquaSimSignalCacheSINR");
 	//asHelper.SetPhyAttribute("transRange", DoubleValue(2500.0));
 	
-	//asHelper.SetPhy("ns3::AquaSimPhyCmn");
+	asHelper.SetPhy("ns3::AquaSimPhyCmn");
 	//asHelper.SetPhy("ns3::AquaSimPhyFDM");
 	//asHelper.SetPhyAttribute("transRange", DoubleValue(1500.0));
+	asHelper.SetMatlab(true);
 
 	MobilityHelper mobility;
 	NetDeviceContainer devices;
@@ -107,6 +101,7 @@ int main(int argc, char *argv[])
 	}
 	std::cout << "Creating Nodes End\n";
 
+
 	mobility.SetPositionAllocator(position);
 	mobility.SetMobilityModel("ns3::RandomWalk2dMobilityModel", "Mode",
 							  StringValue("Time"), "Time", StringValue("2s"), "Speed",
@@ -119,7 +114,7 @@ int main(int argc, char *argv[])
 	//PacketSocketAddress socket;
 	AquaSimSocketAddress socket;
 	socket.SetAllDevices();
-	socket.SetDestinationAddress(devices.Get(2)->GetAddress()); //Set dest to first sink (nodes+1 device)
+	socket.SetDestinationAddress(devices.Get(1)->GetAddress()); //Set dest to first sink (nodes+1 device)
 	socket.SetProtocol(0);
 
 	OnOffNdHelper app("ns3::AquaSimSocketFactory", Address(socket));

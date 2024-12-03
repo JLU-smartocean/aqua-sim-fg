@@ -30,7 +30,7 @@
 #include "ns3/application.h"
 #include "ns3/aqua-sim-signal-cache.h"
 #include "ns3/aqua-sim-sinr-checker.h"
-
+#include "ns3/aqua-sim-matlab-engine.h"
 #include "aqua-sim-helper.h"
 
 #include <sstream>
@@ -156,6 +156,7 @@ AquaSimHelper::AquaSimHelper() {
 	m_sync.SetTypeId("ns3::AquaSimSync");
 	m_localization.SetTypeId("ns3::AquaSimRBLocalization");
 	m_sinrChecker.SetTypeId("ns3::AquaSimThresholdSinrChecker");
+	m_matlab = false;
 	m_attacker = false;
 }
 
@@ -178,6 +179,10 @@ Ptr<AquaSimChannel> AquaSimHelper::GetChannel(int channelId) {
 
 void AquaSimHelper::SetAttacker(bool attacker) {
 	m_attacker = attacker;
+}
+
+void AquaSimHelper::SetMatlab(bool matlab) {
+	m_matlab = matlab;
 }
 
 void AquaSimHelper::SetPhy(std::string type, std::string n0,
@@ -370,8 +375,7 @@ void AquaSimHelper::SetPhyAttribute(std::string name,
 	m_phy.Set(name, value);
 }
 
-Ptr<AquaSimNetDevice> AquaSimHelper::Create(Ptr<Node> node,
-		Ptr<AquaSimNetDevice> device) {
+Ptr<AquaSimNetDevice> AquaSimHelper::Create(Ptr<Node> node, Ptr<AquaSimNetDevice> device) {
 	Ptr<AquaSimPhy> phy = m_phy.Create<AquaSimPhy>();
 	Ptr<AquaSimMac> mac = m_mac.Create<AquaSimMac>();
 	Ptr<AquaSimSignalCache> signalCache = m_signalCache.Create<AquaSimSignalCache>();
@@ -396,6 +400,12 @@ Ptr<AquaSimNetDevice> AquaSimHelper::Create(Ptr<Node> node,
 	device->SetEnergyModel(energyM);
 	device->SetAddress(AquaSimAddress::Allocate());
 	device->GetPhy()->SetSinrChecker(sinr);
+
+	if (m_matlab){
+		ObjectFactory m_matlabM("ns3::AquaSimMatlabEngine");
+		static Ptr<AquaSimMatlabEngine> matlabEngine = m_matlabM.Create<AquaSimMatlabEngine>();
+		device->SetMatlabEngine(matlabEngine);
+	}
 
 	if (m_attacker) {
 		Ptr<AquaSimAttackModel> attackM =

@@ -45,6 +45,7 @@ enum TransStatus {
 #include "aqua-sim-synchronization.h"
 #include "aqua-sim-localization.h"
 #include "aqua-sim-attack-model.h"
+#include "aqua-sim-matlab-engine.h"
 #include "ns3/named-data.h"
 #include <vector>
 
@@ -93,6 +94,7 @@ public:
 	void SetChannel(std::vector<Ptr<AquaSimChannel> > channel); //for multi-channel support
 	//void SetApp (Ptr<AquaSimApp> app);
 	void SetEnergyModel(Ptr<AquaSimEnergyModel> energyModel);
+	void SetMatlabEngine(Ptr<AquaSimMatlabEngine> matlabEngine);
 	void SetAttackModel(Ptr<AquaSimAttackModel> attackModel);
 	void SetNamedData(Ptr<NamedData> ndn);
 
@@ -112,6 +114,7 @@ public:
 	Ptr<AquaSimSync> GetMacSync(void);
 	Ptr<AquaSimLocalization> GetMacLoc(void);
 	Ptr<AquaSimAttackModel> GetAttackModel(void);
+	Ptr<AquaSimMatlabEngine> GetMatlabEngine(void);
 	Ptr<NamedData> GetNamedData(void);
 	int GetClusterHead();
 	void SetClusterHead(int tem_clusterhead);
@@ -255,6 +258,7 @@ private:
 	Ptr<AquaSimSync> m_macSync;
 	Ptr<AquaSimLocalization> m_macLoc;
 	Ptr<AquaSimAttackModel> m_attackModel;
+	Ptr<AquaSimMatlabEngine> m_matlabEngine;
 	Ptr<NamedData> m_ndn;
 	NetDevice::PromiscReceiveCallback m_promiscCallback;
 	NetDevice::ReceiveCallback m_forwardUp;

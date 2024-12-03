@@ -1,4 +1,5 @@
 check_include_file_cxx(stdint.h HAVE_STDINT_H)
+
 if(HAVE_STDINT_H)
     add_definitions(-DHAVE_STDINT_H)
 endif()
@@ -68,6 +69,7 @@ build_lib(
 		 model/aqua-sim-traffic-gen.cc   
 		 model/aqua-sim-hash-table.cc  
 		 model/aqua-sim-pt-tag.cc  
+		 model/aqua-sim-matlab-engine.cc  
     HEADER_FILES helper/named-data-helper.h  
 		 helper/aqua-sim-traffic-gen-helper.h  
 		 helper/aqua-sim-socket-helper.h  
@@ -124,6 +126,7 @@ build_lib(
 		 model/aqua-sim-datastructure.h  
 		 model/aqua-sim-hash-table.h  
 		 model/aqua-sim-pt-tag.h  
+		 model/aqua-sim-matlab-engine.h
     LIBRARIES_TO_LINK ${libcore}
     TEST_SOURCES test/aqua-sim-fg-test-suite.cc
                  ${examples_as_tests_sources}

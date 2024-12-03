@@ -87,6 +87,7 @@ public:
   void SetChannel(Ptr<AquaSimChannel> channel);
   Ptr<AquaSimChannel> GetChannel(int channelId = 0);
   void SetAttacker(bool attacker);
+  void SetMatlab(bool matlab);
   void SetPhy (std::string name,
 			     std::string n0 = "", const AttributeValue &v0 = EmptyAttributeValue (),
 			     std::string n1 = "", const AttributeValue &v1 = EmptyAttributeValue (),
@@ -194,6 +195,7 @@ private:
   bool m_attacker;  //default is false
   ObjectFactory m_sinrChecker;
   ObjectFactory m_signalCache;
+  bool m_matlab;
 };  //class AquaSimHelper
 
 }

@@ -192,6 +192,14 @@ int AquaSimNetDevice::GetClusterHead() {
 	return clusterhead;
 }
 
+void AquaSimNetDevice::SetMatlabEngine(Ptr<AquaSimMatlabEngine> matlabEngine){
+	m_matlabEngine = matlabEngine;
+}
+
+Ptr<AquaSimMatlabEngine> AquaSimNetDevice::GetMatlabEngine(void){
+	return m_matlabEngine;
+}
+
 void AquaSimNetDevice::SetClusterHead(int tem_clusterhead) {
 	clusterhead = tem_clusterhead;
 }
