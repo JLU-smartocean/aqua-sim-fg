@@ -55,6 +55,8 @@ build_lib(
 		 model/aqua-sim-propagation.cc  
 		 model/aqua-sim-propagation-range.cc  
 		 model/aqua-sim-propagation-simple.cc  
+		 model/aqua-sim-propagation-bellhop.cc
+		 model/aqua-sim-propagation-bellhop3D.cc
 		 model/aqua-sim-signal-cache.cc  
 		 model/aqua-sim-mobility-kinematic.cc  
 		 model/aqua-sim-mobility-rwp.cc  
@@ -70,6 +72,10 @@ build_lib(
 		 model/aqua-sim-hash-table.cc  
 		 model/aqua-sim-pt-tag.cc  
 		 model/aqua-sim-matlab-engine.cc  
+		 model/CBXmodel.cc
+		 model/underwater-glider-mobility-model.cc
+		 model/wave-helper.cc
+		 model/wave-mobility-model.cc
     HEADER_FILES helper/named-data-helper.h  
 		 helper/aqua-sim-traffic-gen-helper.h  
 		 helper/aqua-sim-socket-helper.h  
@@ -114,6 +120,8 @@ build_lib(
 		 model/aqua-sim-propagation.h  
 		 model/aqua-sim-propagation-range.h  
 		 model/aqua-sim-propagation-simple.h  
+		 model/aqua-sim-propagation-bellhop.h
+		 model/aqua-sim-propagation-bellhop3D.h
 		 model/aqua-sim-mobility-kinematic.h  
 		 model/aqua-sim-mobility-rwp.h  
 		 model/aqua-sim-mobility-pattern.h  
@@ -127,6 +135,10 @@ build_lib(
 		 model/aqua-sim-hash-table.h  
 		 model/aqua-sim-pt-tag.h  
 		 model/aqua-sim-matlab-engine.h
+		 model/CBXmodel.h
+		 model/underwater-glider-mobility-model.h
+		 model/wave-helper.h
+		 model/wave-mobility-model.h
     LIBRARIES_TO_LINK ${libcore}
     TEST_SOURCES test/aqua-sim-fg-test-suite.cc
                  ${examples_as_tests_sources}

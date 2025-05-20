@@ -1,6 +1,28 @@
 # aqua-sim-fg
 We will soon update the full version of aqua-sim-fg, including more network protocols and a more realistic underwater acoustic propagation model. In addition, aqua-sim-fg will also support hybrid programming with MATLAB and Python.
 
+# Python  hybrid programming
+1. Install cppyy
+```
+python3 -m pip install --user cppyy==2.4.2
+```
+2. Building ns-3    
+```
+./ns3 configure --enable-python-bindings
+./ns3 build
+```
+3. Add  ns3 lib and ns-python to your path
+```
+export PATH=$PATH:/your_ns_path/ns-3.38/build/lib
+export PYTHONPATH=$PYTHONPATH:/your_ns_path/ns-3.38/build/bindings/python
+export LD_LIBRARY_PATH=/your_ns_path/ns-3.38/build/lib
+```
+4. Running
+```
+python aloha.py(An example in examples)
+```
+note: you can also use the precompiled python library (bindings and lib folder)
+
 # MATLAB hybrid programming
 
 1. Install MATLAB and MATLAB Compiler
@@ -16,11 +38,17 @@ link_libraries(mwmclmcrrt)
 link_libraries(xxx)
 ```
 You may need to append the MATLAB Runtime library to LD_LIBRARY_PATH if it's not an Ubuntu 22 system.
-6.  Enable MATLAB using `asHelper.SetMatlab(true)`
+6. Enable MATLAB using `asHelper.SetMatlab(true)`
 
 7. An example is as follows:
 
    ![image-20241203143109727](/home/ch/.config/Typora/typora-user-images/image-20241203143109727.png)
+
+
+# Mobility model and channel model
+1. Bellhop model is used to enable more accurate channel simulation. The communication environment can be configured via the `env` file in the `config` folder.
+2. Multiple underwater vehicle mobility models are implemented. The AUV's movement trajectory can be configured via `config/command.config`.
+
 
 
 # References
